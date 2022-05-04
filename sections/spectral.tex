@@ -1,0 +1,61 @@
+\section{Spectral Graph Theory}
+
+We assume the graph has $n$ vertices and $m$ edges.
+
+\subsection{Courant-Fischer Theorem}
+\begin{enumerate}
+    \item \textbf{Eigenvalue version}: Let $A$ be a symmetric matrix with eigenvalues $\lambda_1 \le \dots \le \lambda_n$, then 
+    $$\lambda_{i}=\min _{\substack{\text { subspace } W \subseteq \mathbb{R}^{n} \\ \operatorname{dim}(W)=i}} \max _{\substack{x \in W \\ x \neq \mathbf{0}}} \frac{x^{\top} A x}{x^{\top} x} = \max _{\substack{\text { subspace } W \subseteq \mathbb{R}^{n} \\ \operatorname{dim}(W)=n+1-i}} \min _{\substack{x \in W\\ x \neq \mathbf{0}}} \frac{x^{\top} A x}{x^{\top} x}.$$
+    \item \textbf{Eigenbasis version}: Let $A$ be a symmetric matrix with eigenvalues $\lambda_1 \le \dots \le \lambda_n$ and corresponding orthonormal eigenvectors $x_1, \dots, x_n$, then
+    $$\lambda_{i}=\min _{\substack{x \perp x_{1}, \ldots x_{i-1} \\ x \neq \mathbf{0}}} \frac{x^{\top} A x}{x^{\top} x} = \max _{\substack{x \perp x_{i+1}, \ldots x_{n} \\ x \neq \mathbf{0}}} \frac{x^{\top} A x}{x^{\top} x}.$$
+\end{enumerate}
+Note that we also have $\lambda_i = \frac{x_i^\top A x_i}{x_i^\top x_i}$.
+
+Applying Courant-Fischer theorem, we have $\lambda_2 x^\top x  \le x^\top L x \le \lambda_n x^\top x$ for all $x \perp \boldsymbol{1}$, as $\boldsymbol{1}$ is the eigenvector of $L$ corresponding to eigenvalue $0$. For connected graphs, $\lambda_2 > 0$.
+
+\subsection{PSD Order (Loewner Order)}
+
+Defined only for symmetric matrices: $A \preceq B$ iff for all $x \in \mathbb{R}^{n}$, we have $x^{\top} A x \leq x^{\top} B x$. We also define $G \preceq H$ for two graphs $G$ and $H$ iff $L_G \preceq L_H$. We always have $G \succeq H$ if $H$ is a subgraph of $G$.
+
+Properties:
+\begin{enumerate}
+    \item If $A \preceq B$ and $B \preceq C$, then $A \preceq C$.
+    \item If $A \preceq B$, then $A+C \preceq B+C$ for any symmetric $C$.
+    \item If $A \preceq B$ and $C \preceq D$, then $A+C \preceq B+D$.
+    \item If $A \succ 0$ and $\alpha \ge 1$, then $\frac{1}{\alpha} A \preceq A \preceq \alpha A$.
+    \item If $A \preceq B$, then $\lambda_i(A) \le \lambda_i(B)$ for all $i$. Proof by Courant-Fischer theorem. The converse is not true.
+\end{enumerate}
+
+\subsection{Bounding the $\lambda_2$ and $\lambda_n$}
+
+\subsubsection{Test Vector Method}
+Since $\lambda_2 \le \frac{y^\top L y}{y^\top y}$ for any $y \perp \boldsymbol{1}$, we can upper bound the $\lambda_2$ by any \textbf{test vector} $y$. Similarly, we can lower bound the $\lambda_n$ by test vectors by $\lambda_n \ge \frac{y^\top L y}{y^\top y}$.
+
+\begin{enumerate}
+    \item For a complete graph $K_n$, $L = n \boldsymbol{I} - \boldsymbol{1}\boldsymbol{1}^\top$ and for any $x \perp \boldsymbol{1}$ we have $x^\top L x = n x^\top x$. Therefore, $\lambda_2(K_n) = \dots = \lambda_n(K_n) = n$ and any $x \perp \boldsymbol{1}$ is an eigenvector.
+    \item For a path graph $P_n$, let $x(i) = n+1 - 2i$ be the test vector which satisfies $x \perp \boldsymbol{1}$, we get $\lambda_2(P_n) \le \frac{12}{n^2}$. Let $x(1)=-1$, $x(n)=1$ and $x(i)=0$ for other $i$ to be the test vector, we get $\lambda_n(P_n) \ge 1$.
+    \item For a complete binary tree $T_n$ (depth equals zero for a single root), let $x(i)=0$ for all non-leaf nodes, $x(i)=-1$ for even-numbered leaf nodes and $x(i)=1$ for odd-numbered leaf nodes be the test vector, we get $\lambda_n(T_n) \ge 1$. Let $x(1)=0$, $x(i)=1$ for the left subtree of the root and $x(i)=-1$ for the right subtree of the root be the test vector, we get $\lambda_2(T_n) \le \frac{2}{n-1}$.
+\end{enumerate}
+
+\subsubsection{Consequences of PSD Order}
+
+Since $x^\top (D-A) x = \sum_{(u,v)} w(u,v)(x(u)-x(v))^2 \ge 0$ and $x^\top (D+A) x = \sum_{(u,v)} w(u,v)(x(u)+x(v))^2 \ge 0$, we have $D \succeq A$ and $D \succeq -A$. In addition, we have $D \preceq (\max D_{i,i}) \boldsymbol{I}$. Therefore, we have $L = D-A \succeq 2D \succeq (2\max D_{i,i}) \boldsymbol{I}$, which implies $\lambda_n \le 2\max D_{i,i}$ for any graph. For unit-weight graphs, this means $\lambda_n \le 2 \max \text{degree}(v)$. The bound is tight for a single-edge graph.
+
+To get lower bounds of $\lambda_2(H)$, we first establish $f(n) H \succeq G$ for some $G$ with known lower bounds on $\lambda_2(G)$. Usually $G=K_n$ because $\lambda_2(K_n) = n$. Then it follows that $\lambda_2(H) \ge \lambda_2(G)/f(n)$.
+
+\begin{enumerate}
+
+    \item \textbf{Path Graph $P_n$}: Let $G_{i,j}$ denote a unit-weight graph consisting of one edge $(i,j)$ and $P_n$ be the path graph connecting $1$ and $n$. Then $(n-1)P_n \succeq G_{1,n}$. Proof follows from applying Cauchy-Schwartz for $\delta_i:=x(i+1)-x(i)$. For weighted paths, we have $G_{1, n} \preceq\left(\sum_{i=1}^{n-1} \frac{1}{w_{i}}\right) \sum_{i=1}^{n-1} w_{i} G_{i, i+1}$.
+
+    Applying path inequality, we have $K_n = \sum_{i<j} G_{i,j} \preceq \sum_{i<j} (j-i) P_{i,j} \preceq \sum_{i<j} (j-i) P_n \preceq n^3 P_n$, which implies $\lambda_2(P_n) \ge \lambda_2(K_n)/n^3 = 1/n^2$.
+
+
+
+    \item \textbf{Any unit-weight graph $G$}: Define the diameter $D$ of a graph $G$ to be the maximum length of the shortest paths between any two nodes. Let $G^s_{i,j}$ be the shortest path from $i$ to $j$. Applying path inequality, we have $K_n = \sum_{i<j} G_{i,j} \preceq \sum_{i<j} D G^s_{i,j} \preceq \sum_{i<j} DG \preceq n^2 DG$, which implies $\lambda_2(G) \ge \frac{1}{nD}$.
+
+    \item \textbf{Complete Binary Tree $T_n$}: Define $G_e$ be the single-edge graph with edge $e$, and $T_{i,j}$ be the unique path between $i$ and $j$. Applying the weighted path inequality, we have $K_n = \sum_{i<j} G_{i,j} \preceq \sum_{i<j}\left(\left(\sum_{e \in T^{i, j}} \frac{1}{w(e)}\right)\left(\sum_{e \in T^{i, j}} w(e) G_{e}\right)\right) \preceq\left(\max _{i<j} \sum_{e \in T^{i, j}} \frac{1}{w(e)}\right)\left(\sum_{i<j} \sum_{e \in T^{i, j}} w(e) G_{e}\right)$. For $e$ connecting level $i$ and $i+1$ for $i \in [d-1]$, we set $w(e)=2^i$. Then $\max _{i<j} \sum_{e \in T^{i, j}} \frac{1}{w(e)} \le 4$. Since the number of occurrence of $e$ in $T^{i,j}$ for any $i<j$ is upper bounded by $n^2 2^{-i}$, we have $\sum_{i<j} \sum_{e \in T^{i, j}} w(e) G_{e} \preceq \sum_{e} w(e) n^2 2^{-i} G_e = \sum_e n^2 G_e = n^2T_n$. Therefore, $K_n \preceq 4n^2T_n$, which implies $\lambda_2(T_n) \ge \frac{1}{4n}$.
+    
+
+\end{enumerate}
+
+
