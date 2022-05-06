@@ -17,6 +17,7 @@
 \usepackage{pdfpages}
 \usepackage[shortlabels]{enumitem}
 \usepackage{flushend}
+\usepackage[abbreviations]{foreign}
 
 \raggedend 
 
@@ -35,6 +36,8 @@
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\Dist}{\mathcal{D}}
 \newcommand{\normal}{\mathcal{N}}
+\newcommand{\prob}{\mathbb{P}}
+
 \DeclareMathOperator{\cov}{\textbf{Cov}}
 \DeclareMathOperator{\var}{\textbf{Var}}
 \DeclareMathOperator{\argmin}{\textbf{argmin}}
@@ -43,6 +46,7 @@
 \DeclareMathOperator{\dir}{\textbf{Dir}}
 \DeclareMathOperator{\cat}{\textbf{Cat}}
 \DeclareMathOperator{\vol}{\textbf{vol}}
+
 
 
 
@@ -60,6 +64,10 @@
 \input{sections/spectral/conductance}
 
 \input{sections/spectral/random_walk}
+
+\input{sections/spectral/pseudo_inverse}
+
+\input{sections/spectral/gaussian_elimination}
 
 \end{multicols*}
 \end{document}

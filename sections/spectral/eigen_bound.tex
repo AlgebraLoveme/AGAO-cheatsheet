@@ -24,6 +24,7 @@ Properties:
     \item If $A \preceq B$ and $C \preceq D$, then $A+C \preceq B+D$.
     \item If $A \succ 0$ and $\alpha \ge 1$, then $\frac{1}{\alpha} A \preceq A \preceq \alpha A$.
     \item If $A \preceq B$, then $\lambda_i(A) \le \lambda_i(B)$ for all $i$. Proof by Courant-Fischer theorem. The converse is not true.
+    \item For any matrix $C$, if $A \preceq B$, then $C^\top A C \preceq C^\top B C$.
 \end{enumerate}
 
 \subsection{Bounding the $\lambda_2$ and $\lambda_n$}
@@ -39,7 +40,7 @@ Since $\lambda_2 \le \frac{y^\top L y}{y^\top y}$ for any $y \perp \boldsymbol{1
 
 \subsubsection{Consequences of PSD Order}
 
-Since $x^\top (D-A) x = \sum_{(u,v)} w(u,v)(x(u)-x(v))^2 \ge 0$ and $x^\top (D+A) x = \sum_{(u,v)} w(u,v)(x(u)+x(v))^2 \ge 0$, we have $D \succeq A$ and $D \succeq -A$. In addition, we have $D \preceq (\max D_{i,i}) \boldsymbol{I}$. Therefore, we have $L = D-A \succeq 2D \succeq (2\max D_{i,i}) \boldsymbol{I}$, which implies $\lambda_n \le 2\max D_{i,i}$ for any graph. For unit-weight graphs, this means $\lambda_n \le 2 \max \text{degree}(v)$. The bound is tight for a single-edge graph.
+Since $x^\top (D-A) x = \sum_{(u,v)} w(u,v)(x(u)-x(v))^2 \ge 0$ and $x^\top (D+A) x = \sum_{(u,v)} w(u,v)(x(u)+x(v))^2 \ge 0$, we have $D \succeq A$ and $D \succeq -A$. In addition, we have $D \preceq (\max D_{i,i}) \boldsymbol{I}$. Therefore, we have $L = D-A \preceq 2D \preceq (2\max D_{i,i}) \boldsymbol{I}$, which implies $\lambda_n \le 2\max D_{i,i}$ for any graph. For unit-weight graphs, this means $\lambda_n \le 2 \max \text{degree}(v)$. The bound is tight for a single-edge graph.
 
 To get lower bounds of $\lambda_2(H)$, we first establish $f(n) H \succeq G$ for some $G$ with known lower bounds on $\lambda_2(G)$. Usually $G=K_n$ because $\lambda_2(K_n) = n$. Then it follows that $\lambda_2(H) \ge \lambda_2(G)/f(n)$.
 

@@ -8,7 +8,7 @@ Definitions:
 
     \item \textbf{$\phi$-expander}: For any $\phi \in (0,1]$, we call a graph $G$ to be a $\phi$-expander if $\phi(G)\ge \phi$.
     \item \textbf{$\phi$-expander decomposition of quality $q$}: A partition $\{X_i\}$ of the vertex set $V$ is called a $\phi$-expander decomposition of quality $q$ if (1) each induced graph $G[X_i]$ is a $\phi$-expander, and (2.i) \#edges not contained in any $G[X_i]$ is at most $q\cdot\phi\cdot m$. The second condition is equivalent to (2.ii) The partition removes at most $q\cdot\phi\cdot m$ edges.
-    \item \textbf{Normalized Laplacian}: We define the \textit{normalized Laplacian} to be $N := D^{-1/2} L D^{-1/2}$. $N$ is still PSD and the first eigenbasis is $D^{1/2}\boldsymbol{1}$. By Courant-Fischer theorem, $\lambda_2(N) = \min_{x \perp D^{1/2}\boldsymbol{1}} \frac{x^\top N x}{x^\top x} = \min_{z \perp d} \frac{z^\top L z}{z^\top D z}$.
+    \item \textbf{Normalized Laplacian}: We define the \textit{normalized Laplacian} to be $N := D^{-1/2} L D^{-1/2}$. $N$ is still PSD, with first eigenvalue equals 0 associated with eigenvector $D^{1/2}\boldsymbol{1}$. By Courant-Fischer theorem, $\lambda_2(N) = \min_{x \perp D^{1/2}\boldsymbol{1}} \frac{x^\top N x}{x^\top x} = \min_{z \perp d} \frac{z^\top L z}{z^\top D z}$.
 \end{enumerate}
 
 \subsection{Cheeger's Inequality}

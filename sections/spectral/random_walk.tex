@@ -1,1 +1,21 @@
-\section{Random Walk}
+\section{Random Walks on a Graph}
+
+A \textbf{random walk on a graph $G$} is a Markov Chain with transition probability $\prob(v_{t+1}=v \mid v_t=u)= w(u,v)/d(u)$ iff $(u,v)\in E$ and 0 otherwise. The transition matrix is thus $W=AD^{-1} = I - D^{1/2} N D^{-1/2}$ and $p_t = W^t p_0$. Define $\boldsymbol{\pi}=\frac{d}{\boldsymbol{1}^\top d}$, thus $\boldsymbol{\pi} = W \boldsymbol{\pi}$ for any $G$, so every $G$ has a stationary distribution.
+
+\subsection{Lazy Random Walks}
+
+A \textbf{lazy random walk on a graph $G$} is a random walk, but has half probability to not move for every step. Assuming that $G$ is connected, the lazy random walk guarantees ergodicity of the Markov Chain, and thus convergence to the stationary distribution. The transition matrix is $\tilde{W} = \frac{1}{2}(I+W) = I - \frac{1}{2} D^{1/2} N D^{-1/2}$.
+
+\textbf{Relation between lazy random walk and normalized Laplacian}: For the $i$-th eigenvalue $\nu_i$ of $N$ associated with eigenvector $\psi_i$, the $\tilde{W}$ has an eigenvalue $1-\frac{1}{2}\nu_i$ associated with eigenvector $D^{1/2}\psi_i$. Since $0 \preceq L \preceq 2D$, we have $0 \preceq N \preceq 2\boldsymbol{I}$ and thus $0\le \lambda_i(N) \le 2$. Therefore, we conclude that all eigenvalues of $\tilde{W} \in [0,1]$.
+
+\textbf{Dynamics of lazy random walk}: Expanding the starting distribution $p_0$ by the eigenvectors of $\tilde{W}$, we have for some $\{\alpha_i\}$ that $p_0 = \sum_{i=1}^n \alpha_i D^{1/2} \psi_i$. Therefore, we have $p_t = \tilde{W}^t p_0 = \sum_{i=1}^n \alpha_i (1-\frac{1}{2}\nu_i)^t D^{1/2}\psi_i \rightarrow \alpha_1 D^{1/2}\psi_1$ as $\nu_1=0$ and $\nu_i>0$ for $i\ne 1$. Since $\psi_1 \propto D^{1/2}\boldsymbol{1}$, we have $\psi_1 = \frac{d^{1/2}}{(\boldsymbol{1}^\top d)^{1/2}}$, thus $\alpha_1 = \psi_1^\top D^{-1/2} p_0 = \frac{\boldsymbol{1}^\top p_0}{(\boldsymbol{1}^\top d)^{1/2}} = \frac{1}{(\boldsymbol{1}^\top d)^{1/2}}$ and $\alpha_1 D^{1/2} \psi_1 = \pi$, which implies $p_t \rightarrow \pi$, the stationary distribution.
+
+\textbf{Rate of Convergence}: For any unit-weight connected graph $G$ and any starting distribution $p_0$, we have $\|p_t - \pi\|_\infty \le e^{-\nu_2 t/2} \sqrt{n}$. Therefore, a larger $\nu_2$ and smaller vertex set means faster convergence, and the convergence rate is exponential.
+
+\subsection{Hitting Time}
+
+\textbf{The expected hitting time} from $a$ to $s$ is defined by $\E H_{a,s}$, where $H_{a,s} = \argmin_t\{v_t=s\mid v_0=a\}$. We want $\E H_{a,s}$ for all vertices $a$ and denote the vector as $h$, \eg, $h(s)=0$.
+
+By one-step analysis, we have $h(a) = 1+\sum_{(a,b)\in E} \frac{w(a,b)}{d(a)} h(b) = 1+\boldsymbol{1}_a^\top W^\top h$, and thus $1 = \boldsymbol{1}_a^\top (\boldsymbol{I}-W^\top)h$. Combining the equation for all vertices except $s$, we have $\boldsymbol{1} - \alpha \boldsymbol{1}_s = (\boldsymbol{I}-W^\top)h$, where $\alpha$ represents the extra freedom from the $n-1$ equations. Multiplying both side by $D$, we get $d - \alpha d(s) \boldsymbol{1}_s = (D-A)h = Lh$, which only have solution when $d - \alpha d(s) \boldsymbol{1}_s \perp \boldsymbol{1}$. Therefore, $\alpha = \|d\|_1 / d(s)$. 
+
+To summarize, by solving $Lh = d - \|d\|_1 \boldsymbol{1}$, we can get the expected hitting time from all vertices to $s$. Note that the solution has one extra freedom because $\dim(\ker(L))=1$, and the correct expected hitting time is $h - h(s)\boldsymbol{1}$ to enforce the constraint that $h(s)=1$. The equation can be solved in $\tilde{O}(m)$.
