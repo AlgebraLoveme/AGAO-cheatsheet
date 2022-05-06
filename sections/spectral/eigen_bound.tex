@@ -1,6 +1,6 @@
 \section{Spectral Graph Theory}
 
-We assume the graph has $n$ vertices and $m$ edges.
+We assume the graph has $n$ vertices and $m$ edges. The vertex set is $V$ and the edge set is $E$.
 
 \subsection{Courant-Fischer Theorem}
 \begin{enumerate}
@@ -55,7 +55,6 @@ To get lower bounds of $\lambda_2(H)$, we first establish $f(n) H \succeq G$ for
 
     \item \textbf{Complete Binary Tree $T_n$}: Define $G_e$ be the single-edge graph with edge $e$, and $T_{i,j}$ be the unique path between $i$ and $j$. Applying the weighted path inequality, we have $K_n = \sum_{i<j} G_{i,j} \preceq \sum_{i<j}\left(\left(\sum_{e \in T^{i, j}} \frac{1}{w(e)}\right)\left(\sum_{e \in T^{i, j}} w(e) G_{e}\right)\right) \preceq\left(\max _{i<j} \sum_{e \in T^{i, j}} \frac{1}{w(e)}\right)\left(\sum_{i<j} \sum_{e \in T^{i, j}} w(e) G_{e}\right)$. For $e$ connecting level $i$ and $i+1$ for $i \in [d-1]$, we set $w(e)=2^i$. Then $\max _{i<j} \sum_{e \in T^{i, j}} \frac{1}{w(e)} \le 4$. Since the number of occurrence of $e$ in $T^{i,j}$ for any $i<j$ is upper bounded by $n^2 2^{-i}$, we have $\sum_{i<j} \sum_{e \in T^{i, j}} w(e) G_{e} \preceq \sum_{e} w(e) n^2 2^{-i} G_e = \sum_e n^2 G_e = n^2T_n$. Therefore, $K_n \preceq 4n^2T_n$, which implies $\lambda_2(T_n) \ge \frac{1}{4n}$.
     
-
 \end{enumerate}
 
 
