@@ -1,2 +1,11 @@
 \section{Gaussian Elimination for Laplacian}
 
+\subsection{Optimization View}
+
+Solving $Lx = d$ is equivalent to solving $\argmin_x -d^\top x + \frac{1}{2} x^\top L x$. By iteratively optimize over $x_i$, we get a series of similar optimizations. The final optimization is straightforward, then we can back substitute to get $x$.
+
+\subsection{Additive View}
+
+Given an invertible square lower/upper triangular matrix $M$, we can solve $Mx=d$ by back substitution in $O(\nnz(M))$, where $\nnz(M)$ means the number of non-zeros in $M$. Therefore, if we know the \textbf{Cholesky decomposition} $L = M M^\top$ (requires $O(n^3)$), then we can solve $Lx =d = M (M^\top x)$ by (1) solving $M y =d$ then (2) solving $M^\top x =y$ in $O(\nnz(M))$.
+
+However, the Laplacian is non-invertible, leading to one diagonal of $M$ equals 0. Therefore, we need to play a trick. Define $\hat{M}$ equals $M$ but has value 1 for the zero diagonal, and $\hat{D}$ be a diagonal matrix that has value 0 at the zero diagonal of $M$ and 1 otherwise. Then $L = \hat{M} \hat{D} \hat{M}^\top$, and each $\hat{M}$ is now invertible. Since $\hat{D}^+ = \hat{D}$, we can find a special solution of $Lx=d$ by (1) solving $\hat{M} z = d$, (2) computing $y = \hat{D} z$, and (3) solving $\hat{M}^\top x = y$. The solution space is obtained by adding a subspace spanned by $\boldsymbol{1}$.
