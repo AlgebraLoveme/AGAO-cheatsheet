@@ -1,4 +1,4 @@
-\section{Effective Resistance}
+\section{Pseudo-Inverse and Effective Resistance}
 
 Given a Laplacian $L$, its (Moore-Penrose) pseudo inverse is defined to be either of the two equivalents:
 \begin{enumerate}
@@ -9,6 +9,7 @@ Given a Laplacian $L$, its (Moore-Penrose) pseudo inverse is defined to be eithe
 Property:
 \begin{itemize}
     \item Assume $M=X Y X^\top$, where $X$ is real and invertible, and $Y$ is real and symmetric. Let $\Pi_M$ be the orthogonal projection to the image of $M$. Then $M^+ = \Pi_M (X^\top)^{-1} Y^+ X^{-1} \Pi_M$.
+    \item For symmetric $L$, $\Pi_L:= \sum_{\lambda_i \ne 0} v_i v_i^\top =  L^{+/2} L L^{+/2} = L^+ L = L L^+$ is the orthogonal projection to the image of $L$, \ie, $\Pi_L v = 0$ for any $v \in \ker(L)$ and $\Pi_v = v$ for any $v \in \im(L)$. For connected $G$, $\Pi_{L} = \boldsymbol{I} - \frac{1}{n} \boldsymbol{1} \boldsymbol{1}^\top$.
 \end{itemize}
 
 The effective resistance between vertex $a$ and $b$ is defined to be the cost (energy lost) to routing one unit (of positive electric charge) from $a$ to $b$: $R_{\text{eff}}(a,b) = \min_{Bf = \boldsymbol{1}_b - \boldsymbol{1}_a} f^\top R f = \tilde{f}^\top R \tilde{f}$, where $\tilde{f}$ is the electric flow. Let $\tilde{x}$ be the electric voltages, we also have $L\tilde{x} = \boldsymbol{1}_b - \boldsymbol{1}_a$, and thus $R_{\text{eff}}(a,b) = \tilde{x}^\top L \tilde{x} = (\boldsymbol{1}_b - \boldsymbol{1}_a)^\top L^+ (\boldsymbol{1}_b - \boldsymbol{1}_a) = \|L^{+/2} (\boldsymbol{1}_b - \boldsymbol{1}_a)\|_2^2$.

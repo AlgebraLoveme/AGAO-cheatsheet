@@ -1,1 +1,42 @@
 \section{Concentration of Random Matrices}
+
+\begin{enumerate}
+    \item \textbf{Chernoff Bound for Bounded independent variables}: Suppose $\{X_i \in \mathbb{R}\}$ are independent random variables and $0\le X_i \le R$. Let $X = \sum_i X_i$ and $\mu = \E X$. Then for any $0<\epsilon \le 1$, we have $\prob(X \ge (1+\epsilon)\mu) \le \exp(-\frac{\epsilon^2 \mu}{4R})$ and $\prob(X \le (1-\epsilon)\mu) \le \exp(-\frac{\epsilon^2 \mu}{4R})$.
+    \item \textbf{Bernstein Bound for independent, zero-mean and bounded variables}: Suppose $\{X_i \in \mathbb{R}\}$ are independent, zero-mean random variables and $|X_i| \le R$. Let $X = \sum_i X_i$, and $\sigma^2 = \var(X)$. Then for any $t > 0$, we have $\prob(|X| \ge t) \le 2\exp(\frac{-t^2}{2Rt+4\sigma^2})$.
+
+    The proof is similar to Chernoff bound. (1) $\prob(X\ge t) = \prob(\exp(\theta X) \ge \exp(\theta t)) \le \exp(-\theta t)\E (\exp(\theta X))$, (2) upper bound $\E (\exp(\theta X)) \le \exp(\theta^2 \sigma^2)$ given $\theta \in (0, \frac{1}{R}]$, which allows $\exp(\theta X_i) \le 1+\theta X_i +(\theta X_i)^2$, and (3) take the minimum among $\theta \in (0,\frac{1}{R}]$.
+
+    \item \textbf{Bernstein Bound for independent, zero-mean and bounded symmetric matrices}: Suppose $\{X_i \in \mathbb{R}^{n\times n}\}$ are independent, zero-mean, symmetric random matrices and $\|X_i\| \le R$, where $\|\cdot\|$ is the spectral norm (the largest singular value). Let $X = \sum_i X_i$, and $\sigma^2 = \|\sum_{i=1}^n \E X_i^2\|$. Then $\prob(\|X\|\ge t) \le 2n \exp(\frac{-t^2}{2Rt+4\sigma^2})$.
+\end{enumerate}
+
+\subsection{Matrix Functions}
+
+Given a real-valued function $f: \mathbb{R}\rightarrow \mathbb{R}$ and a symmetric matrix $A$ with eigen-decomposition $A=V\Lambda V^\top$, we define $f(A) = V f(\Lambda) V^\top$. This is compatible to the Taylor expansion $f(x) = \sum_i \alpha_i x^i$, as $f(A) = \sum_i \alpha A^i = V (\sum_i \alpha_i f(\Lambda)) V^\top = V f(\Lambda) V^\top$.
+
+\textbf{Monotonicity}: Given $f: \mathcal{D} \rightarrow \mathcal{C}$ and partial orders $\le_{\mathcal{C}}$ and $\le_{\mathcal{D}}$, we call $f$ is monotonically increasing w.r.t. these orders iff for all $d_1 \le_{\mathcal{D}} d_2 \in \mathcal{D}$ we have $f(d_1) \le f(d_2)$. For matrix functions, we use the PSD order as the ordering.
+
+Property:
+\begin{itemize}
+    \item If the scalar function $f$ is monotonically increasing, then the matrix function $X \rightarrow \Tr(f(X))$ is monotonically increasing.
+    \item $\log(\cdot)$ is monotonically increasing.
+    \item The matrix function $(\cdot)^2$ and $\exp(\cdot)$ is \textbf{not} monotone.
+    \item $\exp(A) \preceq \boldsymbol{I} + A + A^2$ for $\|A\| \le 1$.
+    \item $\log(\boldsymbol{I}+A) \preceq A$ for $A \succ -\boldsymbol{I}$.
+\end{itemize}
+
+\subsection{Approximating a Dense Graph by Sparse Graphs}
+
+Given PD matrices $A, B$ and $\epsilon>0$, we say $A \approx_{\epsilon} B$ iff $\frac{1}{1+\epsilon} A \preceq B \preceq (1+\epsilon) A$. If $L_G \approx_{\epsilon} L_{\tilde{G}}$ and $|\tilde{E}| \ll |E|$, we call $\tilde{G}$ a spectral sparsifier of $G$.
+
+Properties:
+\begin{itemize}
+    \item Define $c_G(T) := \sum_{e \in E \cap (T\times V\setminus T)} w(e)$ to be the value of the cut $(T, V\setminus T)$. If $L_G \approx_{\epsilon} L_{\tilde{G}}$, then for all $T \subset V$, we have $\frac{1}{1+\epsilon} c_G(T) \le c_{\tilde{G}}(T) \le (1+\epsilon) c_G(T)$. The proof is by noticing $c_G(T) = 1_T^\top L_G 1_T$.
+    \item $L \approx_{\epsilon} \tilde{L} \Leftrightarrow \Pi_L \approx_\epsilon L^{+/2} \tilde{L} L^{+/2}$, as $A \preceq B$ implies $C^\top A C \preceq C^\top B C$ for any $C\in \mathbb{R}^{n\times n}$.
+    \item For $\epsilon \le 1$, if $\|\Pi_L - L^{+/2} \tilde{L} L^{+/2}\| \le \epsilon/2$, then $\Pi_L \approx_\epsilon L^{+/2} \tilde{L} L^{+/2}$.
+\end{itemize}
+
+Theorem: Consider a connected graph $G=(V, E, w)$, with $n=|V|$. For any $0<\epsilon<1$ and $0<\delta<1$, there exist sampling probabilities $p_{e}$ for each edge $e \in E$ s.t. if we include each edge $e$ in $\tilde{E}$ independently with probabilty $p_{e}$ and set its weight $\tilde{w}(e)=\frac{1}{p_{e}} w(e)$, then with probability at least $1-\delta$ the graph $\tilde{G}=(V, \tilde{E}, \tilde{w})$ satisfies
+$
+L_{G} \approx_{\epsilon} L_{\tilde{G}} \text { and }|\tilde{E}| \leq O\left(n \epsilon^{-2} \log (n / \delta)\right)
+$.
+The proof uses Bernstein bounds to prove the concentration of the constructed random graph.
