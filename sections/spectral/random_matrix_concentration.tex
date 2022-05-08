@@ -24,7 +24,7 @@ Property:
     \item The matrix function $(\cdot)^2$ and $\exp(\cdot)$ is \textbf{not} monotone.
     \item $\exp(A) \preceq \boldsymbol{I} + A + A^2$ for $\|A\| \le 1$.
     \item $\log(\boldsymbol{I}+A) \preceq A$ for $A \succ -\boldsymbol{I}$.
-    \item (Lieb's theorem): $f(A):= \Tr(\exp(H+\log(A)))$ for some symmetric $H$ is concave in the domain of PSD matrices. This is in particular useful with Markov theorem.
+    \item (Lieb's theorem): $f(A):= \Tr(\exp(H+\log(A)))$ for some symmetric $H$ is concave in the domain of PSD matrices. This is in particular useful with Markov inequality because $\prob(\|X\| \ge t) = \prob(\lambda_n \ge t) \le \prob(\Tr(\exp(\theta X)) \ge \exp(\theta t)) \le \exp(-\theta t)\E(\Tr(\exp(\theta X)))$.
 \end{itemize}
 
 \subsection{Approximating a Dense Graph by Sparse Graphs}
