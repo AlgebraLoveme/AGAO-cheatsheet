@@ -1,0 +1,7 @@
+\section{Solving Laplacian Linear Equations Approximately}
+
+Idea: solving Laplacian linear equations requires $O(m)$, which is expensive when the graph is dense. By approximating the Laplacian, we can get an approximation of the solution quickly.
+
+Given PSD matrix $M$ and $d \in \im(M)$, let $M x^* = d$. We say that $\tilde{x}$ is an $\epsilon$-approximate solution to $Mx=d$ iff $\|\tilde{x} - x^*\|_M^2 \le \epsilon \|x^*\|_M^2$, where $\|x\|_M^2 = x^\top M x$. Note that any solution to $M x = d$ has the same $\|\cdot\|_M^2$, as they differ by a vector in the kernel of $M$.
+
+Theorem: Given a Laplacian $\boldsymbol{L}$ of a weighted undirected graph $G=(V, E, \boldsymbol{w})$ with $|E|=m$ and $|V|=n$ and a demand vector $\boldsymbol{d} \in \mathbb{R}^{V}$, we can find $\tilde{\boldsymbol{x}}$ that is an $\epsilon$-approximate solution to $\boldsymbol{L x}=\boldsymbol{d}$, using an algorithm that takes time $O\left(m \log ^{c} n \log (1 / \epsilon)\right)$ for some fixed constant $c$ and succeeds with probability $1-1 / n^{10}$. Note that without known Cholesky decomposition in advance, the exact solution requires $O(n^3)$ and $m \le n^2 / 2$.
