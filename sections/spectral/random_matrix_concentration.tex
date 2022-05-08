@@ -24,6 +24,7 @@ Property:
     \item The matrix function $(\cdot)^2$ and $\exp(\cdot)$ is \textbf{not} monotone.
     \item $\exp(A) \preceq \boldsymbol{I} + A + A^2$ for $\|A\| \le 1$.
     \item $\log(\boldsymbol{I}+A) \preceq A$ for $A \succ -\boldsymbol{I}$.
+    \item (Lieb's theorem): $f(A):= \Tr(\exp(H+\log(A)))$ for some symmetric $H$ is concave in the domain of PSD matrices. This is in particular useful with Markov theorem.
 \end{itemize}
 
 \subsection{Approximating a Dense Graph by Sparse Graphs}
@@ -37,7 +38,7 @@ Properties:
     \item For $\epsilon \le 1$, if $\|\Pi_L - L^{+/2} \tilde{L} L^{+/2}\| \le \epsilon/2$, then $\Pi_L \approx_\epsilon L^{+/2} \tilde{L} L^{+/2}$.
 \end{itemize}
 
-Theorem: Consider a connected graph $G=(V, E, w)$, with $n=|V|$. For any $0<\epsilon<1$ and $0<\delta<1$, there exist sampling probabilities $p_{e}$ for each edge $e \in E$ s.t. if we include each edge $e$ in $\tilde{E}$ independently with probabilty $p_{e}$ and set its weight $\tilde{w}(e)=\frac{1}{p_{e}} w(e)$, then with probability at least $1-\delta$ the graph $\tilde{G}=(V, \tilde{E}, \tilde{w})$ satisfies
+\textbf{Theorem}: Consider a connected graph $G=(V, E, w)$, with $n=|V|$. For any $0<\epsilon<1$ and $0<\delta<1$, there exist sampling probabilities $p_{e}$ for each edge $e \in E$ s.t. if we include each edge $e$ in $\tilde{E}$ independently with probabilty $p_{e}$ and set its weight $\tilde{w}(e)=\frac{1}{p_{e}} w(e)$, then with probability at least $1-\delta$ the graph $\tilde{G}=(V, \tilde{E}, \tilde{w})$ satisfies
 $
 L_{G} \approx_{\epsilon} L_{\tilde{G}} \text { and }|\tilde{E}| \leq O\left(n \epsilon^{-2} \log (n / \delta)\right)
 $.
