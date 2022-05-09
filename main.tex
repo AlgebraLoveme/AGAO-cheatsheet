@@ -18,6 +18,7 @@
 \usepackage[shortlabels]{enumitem}
 \usepackage{flushend}
 \usepackage[abbreviations]{foreign}
+\usepackage{tcolorbox}
 
 \raggedend 
 
@@ -37,6 +38,10 @@
 \newcommand{\Dist}{\mathcal{D}}
 \newcommand{\normal}{\mathcal{N}}
 \newcommand{\prob}{\mathbb{P}}
+\newcommand{\HEADER}[1]{\begin{tcolorbox}
+    \centering
+    #1
+\end{tcolorbox}}
 
 \DeclareMathOperator{\cov}{\textbf{Cov}}
 \DeclareMathOperator{\var}{\textbf{Var}}
@@ -66,8 +71,11 @@
 
 % Part 1: Convex Optimization
 
+\HEADER{Convex Optimization}
 
 % Part 2: spectral graph theory
+
+\HEADER{Spectral Graph Theory}
 
 \input{sections/spectral/eigen_bound}
 
@@ -84,6 +92,8 @@
 \input{sections/spectral/approximate_linear}
 
 % Part 3: Combinatorial Graph Algorithms
+
+\HEADER{Combinatorial Graph Algorithms}
 
 \input{sections/combinatorial/maximum_flow}
 

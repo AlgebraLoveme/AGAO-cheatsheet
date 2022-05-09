@@ -1,2 +1,20 @@
-\section{Maximum Flow}
+\section{Maximum Flows and Minimum Cuts}
 
+\subsection{Flows}
+Definition:
+\begin{enumerate}
+    \item \textbf{Maximum flow problem}: Given a source vertex and a sink vertex, maximize $F$ such that $\boldsymbol{B}\boldsymbol{f} = F (-\boldsymbol{1}_s + \boldsymbol{1}_t)$ and $0 \le \boldsymbol{f} \le \boldsymbol{c}$. Such flows are called $s$-$t$ flows.
+    \item \textbf{Path flow}: A $s$-$t$ path flow is a flow that only uses a simple path from $s$ to $t$.
+    \item \textbf{Cycle flow}: A cycle flow is a flow that only uses a simple cycle, it does not create net-in or net-out.
+\end{enumerate}
+
+\textbf{Path-cycle decomposition lemma}: Any $s$-$t$ flow can be decomposed to a sum of $s$-$t$ path flows and cycle flows such that the summation has at most $\nnz(\boldsymbol{f})$ terms.
+
+There is always an optimal flow that can be decomposed to only path flows, as the cycle flow does not route anything from $s$-$t$ and removing all cycle flows in an optimal flow creates another optimal flow.
+
+\subsection{Cuts}
+
+Definition:
+\begin{enumerate}
+    \item 
+\end{enumerate}
