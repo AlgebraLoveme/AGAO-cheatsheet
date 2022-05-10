@@ -3,10 +3,10 @@
 \subsection{Flows}
 Definition:
 \begin{enumerate}
-    \item \textbf{$s$-$t$ flow}: A $s$-$t$ flow is a flow such that $\boldsymbol{B}\boldsymbol{f} = F (-\boldsymbol{1}_s + \boldsymbol{1}_t)$ for some $F\ge 0$, \ie, routes some unit from $s$ to $t$.
+    \item \textbf{$s$-$t$ flow}: an $s$-$t$ flow is a flow such that $\boldsymbol{B}\boldsymbol{f} = F (-\boldsymbol{1}_s + \boldsymbol{1}_t)$ for some $F\ge 0$, \ie, routes some unit from $s$ to $t$. $F$ is defined to be $\val(\boldsymbol{f})$.
     \item \textbf{Maximum flow problem}: Given a source vertex and a sink vertex, maximize $F$ such that $\boldsymbol{B}\boldsymbol{f} = F (-\boldsymbol{1}_s + \boldsymbol{1}_t)$ and $0 \le \boldsymbol{f} \le \boldsymbol{c}$.
-    \item \textbf{Path flow}: A $s$-$t$ path flow is a $s$-$t$ flow that only uses a simple path from $s$ to $t$.
-    \item \textbf{Cycle flow}: A cycle flow is a flow that only uses a simple cycle, it does not create net-in or net-out.
+    \item \textbf{Path flow}: an $s$-$t$ path flow is an $s$-$t$ flow that only uses a simple path from $s$ to $t$.
+    \item \textbf{Cycle flow}: A cycle flow is a flow that only uses a simple cycle, so it does not create net-in or net-out.
 \end{enumerate}
 
 \textbf{Path-cycle decomposition lemma}: Any $s$-$t$ flow can be decomposed to a sum of $s$-$t$ path flows and cycle flows such that the summation has at most $\nnz(\boldsymbol{f})$ terms.
@@ -17,10 +17,41 @@ There is always an optimal flow that can be decomposed to only path flows, as th
 
 Definition:
 \begin{enumerate}
-    \item \textbf{$s$-$t$ cuts}: A $s$-$t$ cut is a cut $(S, V\setminus S)$ such that $s \in S$ and $t \in V\setminus S$.
+    \item \textbf{$s$-$t$ cuts}: an $s$-$t$ cut is a cut $(S, V\setminus S)$ such that $s \in S$ and $t \in V\setminus S$.
     \item \textbf{Minimum cut problem}: Given two vertices $s$ and $t$, minimize the cut value $c_G(S)=\sum_{e \in E \cap (S\times V\setminus S)} w(e)$ such that $s \in S$ and $t \in V\setminus S$.
 \end{enumerate}
 
-If there is no feasible $s$-$t$ flow, then define $S$ to be the set of vertices reachable from $s$, $(S, V\setminus S)$ is a $s$-$t$ cut.
+If there is no feasible $s$-$t$ flow, then define $S$ to be the set of vertices reachable from $s$, $(S, V\setminus S)$ is an $s$-$t$ cut.
+
+\subsection{Solving Maximum Flow}
+
+Greedily adding flows on the original graph $G$ leads to problems, but greedily adding flows on the residual graph $G_{\boldsymbol{f}}$ is optimal. This is because residual graph allows to cancel some part of the added flow in order to increase the unit routed.
+
+The algorithm: (1) initialize $\boldsymbol{f}=0$, (2) repeatly find an $s$-$t$ flow $\tilde{\boldsymbol{f}}$ such that $-\boldsymbol{f} \le \tilde{\boldsymbol{f}} \le \boldsymbol{c} + \boldsymbol{f}$ and set $\boldsymbol{f} = \boldsymbol{f} + \tilde{\boldsymbol{f}}$.
+
+Property:
+\begin{enumerate}
+    \item Assume $\boldsymbol{f}$ is feasible in $G$. Then $\tilde{\boldsymbol{f}}$ is feasible in $G_{\boldsymbol{f}}$ $\Leftrightarrow$ $\tilde{\boldsymbol{f}} + \boldsymbol{f}$ is feasible in $G$. Proof follows from definition.
+    \item A feasible $\boldsymbol{f}$ is optimal iff there is no feasible $s$-$t$ flow in $G_{\boldsymbol{f}}$. Proof by contradiction.
+\end{enumerate}
+
+\textbf{Ford-Fulkerson Algorithm}
+
+We call the minimum capacity of all edges in an $s$-$t$ flow to be the bottleneck capacity.
+
+Algorithm: find an arbitrage $s$-$t$ path flow in $G_f$, augment it to route the bottleneck, then add it to the current flow, repeatly. 
+
+For irrational capacities this algorithm may not terminate. For integer capacities (rational capacities can be translated to integer capacities to multiplication), each round must increase the capacity of current flow by at least 1, so it terminates in $F^*)$ augmentations, which is $O(m F^*))$ time.
+
+Algorithm: find the $s$-$t$ path flow with the maximum bottleneck capacity, then add it to the current flow, repeatly.
+
+Using binary search on the threshold of bottleneck capacity (only use edges with capacity greater than the threshold), we can find the maximum bottleneck capacity in $O(m \log n)$. This path flow carries at least $\frac{1}{m}$ fraction of the remaining flows in $G_{\boldsymbol{f}}$, as there are at most $m$ path flows. Therefore, it terminates when $(1-\frac{1}{m})^T F^*) < 1$, which means $T = O(m \log F^*)$. The total time is $O(T m \log n) = O(m^2 \log n \log F^*)$.
 
 \subsection{Duality of Max Flow and Min Cut}
+
+\begin{itemize}
+    \item \textbf{Max flow $\le$ Min cut}: For any feasible $s$-$t$ flow and any $s$-$t$ cut, we have $\val(f) \le c_G(S)$. To see this, simply observe that this flow must cross the cut, so the maximum value that can be routed is bounded by the maximum capacity allowed by the cut. In particular, the maximum $s$-$t$ flow is bounded by the minimum $s$-$t$ cut.
+    \item \textbf{Max flow $\ge$ Min cut}: let $\boldsymbol{f}$ be the maximum flow composed of only $s$-$t$ path flows, then $t$ is not reachable from $s$ in $G_{\boldsymbol{f}}$. Define $S$ to be the vertex set that is reachable from $s$. Then $\boldsymbol{f}$ saturates every edge in $E \cap \{S \times V\setminus S\}$. There is no edge in $\boldsymbol{f}$ that is directed from $V \setminus S$ to $S$, as there is no edge from $S$ to $V \setminus S$ in $G_{\boldsymbol{f}}$. This implies $\val(\boldsymbol{f}) \ge c_G(S)$, and thus the maximum flow is greater than the minimum cut.
+\end{itemize}
+
+Combining this two, we estabilish that strong duality between the maximum flow and the minimum cut holds, \ie, max flow = min cut.
