@@ -43,9 +43,9 @@ Algorithm: find an arbitrage $s$-$t$ path flow in $G_f$, augment it to route the
 
 For irrational capacities this algorithm may not terminate. For integer capacities (rational capacities can be translated to integer capacities to multiplication), each round must increase the capacity of current flow by at least 1, so it terminates in $F^*)$ augmentations, which is $O(m F^*))$ time.
 
-Algorithm: find the $s$-$t$ path flow with the maximum bottleneck capacity, then add it to the current flow, repeatly.
+Modified algorithm (may be faster in some cases): find the $s$-$t$ path flow with the maximum bottleneck capacity, then add it to the current flow, repeatly.
 
-Using binary search on the threshold of bottleneck capacity (only use edges with capacity greater than the threshold), we can find the maximum bottleneck capacity in $O(m \log n)$. This path flow carries at least $\frac{1}{m}$ fraction of the remaining flows in $G_{\boldsymbol{f}}$, as there are at most $m$ path flows. Therefore, it terminates when $(1-\frac{1}{m})^T F^*) < 1$, which means $T = O(m \log F^*)$. The total time is $O(T m \log n) = O(m^2 \log n \log F^*)$.
+Using binary search on the threshold of bottleneck capacity (only use edges with capacity greater than the threshold), we can find the maximum bottleneck capacity in $O(m \log n)$. This path flow carries at least $\frac{1}{m}$ fraction of the remaining flows in $G_{\boldsymbol{f}}$, as there are at most $m$ path flows. Therefore, it terminates when $(1-\frac{1}{m})^T F^* < 1$, which means $T = O(m \log F^*)$. The total time is $O(T m \log n) = O(m^2 \log n \log F^*)$.
 
 \subsection{Duality of Max Flow and Min Cut}
 
