@@ -3,8 +3,9 @@
 \subsection{Flows}
 Definition:
 \begin{enumerate}
-    \item \textbf{Maximum flow problem}: Given a source vertex and a sink vertex, maximize $F$ such that $\boldsymbol{B}\boldsymbol{f} = F (-\boldsymbol{1}_s + \boldsymbol{1}_t)$ and $0 \le \boldsymbol{f} \le \boldsymbol{c}$. Such flows are called $s$-$t$ flows.
-    \item \textbf{Path flow}: A $s$-$t$ path flow is a flow that only uses a simple path from $s$ to $t$.
+    \item \textbf{$s$-$t$ flow}: A $s$-$t$ flow is a flow such that $\boldsymbol{B}\boldsymbol{f} = F (-\boldsymbol{1}_s + \boldsymbol{1}_t)$ for some $F\ge 0$, \ie, routes some unit from $s$ to $t$.
+    \item \textbf{Maximum flow problem}: Given a source vertex and a sink vertex, maximize $F$ such that $\boldsymbol{B}\boldsymbol{f} = F (-\boldsymbol{1}_s + \boldsymbol{1}_t)$ and $0 \le \boldsymbol{f} \le \boldsymbol{c}$.
+    \item \textbf{Path flow}: A $s$-$t$ path flow is a $s$-$t$ flow that only uses a simple path from $s$ to $t$.
     \item \textbf{Cycle flow}: A cycle flow is a flow that only uses a simple cycle, it does not create net-in or net-out.
 \end{enumerate}
 
@@ -16,5 +17,10 @@ There is always an optimal flow that can be decomposed to only path flows, as th
 
 Definition:
 \begin{enumerate}
-    \item 
+    \item \textbf{$s$-$t$ cuts}: A $s$-$t$ cut is a cut $(S, V\setminus S)$ such that $s \in S$ and $t \in V\setminus S$.
+    \item \textbf{Minimum cut problem}: Given two vertices $s$ and $t$, minimize the cut value $c_G(S)=\sum_{e \in E \cap (S\times V\setminus S)} w(e)$ such that $s \in S$ and $t \in V\setminus S$.
 \end{enumerate}
+
+If there is no feasible $s$-$t$ flow, then define $S$ to be the set of vertices reachable from $s$, $(S, V\setminus S)$ is a $s$-$t$ cut.
+
+\subsection{Duality of Max Flow and Min Cut}
