@@ -1,0 +1,45 @@
+\section{A Characterization of Convex Functions}
+\textbf{Theorem:}
+Let $S$ be an open convex subset of $\mathbb{R}^{n}$, and let $f: S \rightarrow \mathbb{R}$ be a differentiable function. Then, $f$ is convex if and only if for any $\boldsymbol{x}, \boldsymbol{y} \in S$ we have that $f(\boldsymbol{y}) \geq f(\boldsymbol{x})+$ $\boldsymbol{\nabla} f(\boldsymbol{x})^{\top}(\boldsymbol{y}-\boldsymbol{x}) .$
+\section{Convexity and Second Derivatives,
+Gradient Descent and Acceleration}
+\textbf{Theorem:} (The Spectral Theorem for Symmetric Matrices). For all symmetric $\boldsymbol{A} \in$ $\mathbb{R}^{n \times n}$ there exist $\boldsymbol{V} \in \mathbb{R}^{n \times n}$ and a diagonal matrix $\boldsymbol{\Lambda} \in \mathbb{R}^{n \times n}$ s.t.
+1. $\boldsymbol{A}=\boldsymbol{V} \boldsymbol{\Lambda} \boldsymbol{V}^{\top}$.
+2. $\boldsymbol{V}^{\top} \boldsymbol{V}=\boldsymbol{I}$ (the $n \times n$ identity matrix). I.e. the columns of $\boldsymbol{V}$ form an orthonormal basis. Furthermore, $\boldsymbol{v}_{i}$ is an eigenvector of $\lambda_{i}(\boldsymbol{A})$, the ith eigenvalue of $\boldsymbol{A}$.
+3. $\boldsymbol{\Lambda}_{i i}=\lambda_{i}(\boldsymbol{A})$.
+
+\textbf{Theorem}:
+Let $S \subseteq \mathbb{R}^{n}$ be open and convex, and let $f: S \rightarrow \mathbb{R}$ be twice continuously differentiable.
+1. If $H_{f}(\boldsymbol{x})$ is positive semi-definite for any $\boldsymbol{x} \in S$ then $f$ is convex on $S$.
+2. If $H_{f}(\boldsymbol{x})$ is positive definite for any $\boldsymbol{x} \in S$ then $f$ is strictly convex on $S$.
+3. If $f$ is convex, then $H_{f}(\boldsymbol{x})$ is positive semi-definite $\forall \boldsymbol{x} \in S$.
+
+\section{Gradient Descent}
+\textbf{Theorem} When running Gradient Descent as given by the step in Equation (3.1), for all $i\left\|\boldsymbol{x}_{i}-\boldsymbol{x}^{*}\right\|_{2} \leq\left\|\boldsymbol{x}_{0}-\boldsymbol{x}^{*}\right\|_{2}$.
+
+
+\textbf{Theorem:}Let $f: \mathbb{R}^{n} \rightarrow \mathbb{R}$ be a $\beta$-gradient Lipschitz, convex function. Let $\boldsymbol{x}_{0}$ be a given starting point, and let $\boldsymbol{x}^{*} \in \arg \min _{x \in \mathbb{R}^{n}} f(\boldsymbol{x})$ be a minimizer of $f$. The Gradient Descent algorithm given by
+$$
+\boldsymbol{x}_{i+1}=\boldsymbol{x}_{i}-\frac{1}{\beta} \boldsymbol{\nabla} f\left(\boldsymbol{x}_{i}\right)
+$$
+ensures that the kth iterate satisfies
+$$
+f\left(\boldsymbol{x}_{k}\right)-f\left(\boldsymbol{x}^{*}\right) \leq \frac{2 \beta\left\|\boldsymbol{x}_{0}-\boldsymbol{x}^{*}\right\|_{2}^{2}}{k+1} .
+$$
+\
+\textbf{Theorem} Let $f: \mathbb{R}^{n} \rightarrow \mathbb{R}$ be a $\beta$-gradient Lipschitz, convex function. Let $\boldsymbol{x}_{0}$ be a
+The Accelerated Gradient Descent algorithm given by
+$$
+\begin{aligned}
+a_{i} &=\frac{i+1}{2}, A_{i}=\frac{(i+1)(i+2)}{4} \\
+\boldsymbol{v}_{0} &=\boldsymbol{x}_{0}-\frac{1}{2 \beta} \boldsymbol{\nabla} f\left(\boldsymbol{x}_{0}\right) \\
+\boldsymbol{y}_{i} &=\boldsymbol{x}_{i}-\frac{1}{\beta} \boldsymbol{\nabla} f\left(\boldsymbol{x}_{i}\right) \\
+\boldsymbol{x}_{i+1} &=\frac{A_{i} \boldsymbol{y}_{i}+a_{i+1} \boldsymbol{v}_{i}}{A_{i+1}} \\
+\boldsymbol{v}_{i+1} &=\boldsymbol{v}_{i}-\frac{a_{i+1}}{\beta} \boldsymbol{\nabla} f\left(\boldsymbol{x}_{i+1}\right)
+\end{aligned}
+$$
+ensures that the kth iterate satisfies
+$$
+f\left(\boldsymbol{x}_{k}\right)-f\left(\boldsymbol{x}^{*}\right) \leq \frac{2 \beta\left\|\boldsymbol{x}_{0}-\boldsymbol{x}^{*}\right\|_{2}^{2}}{(k+1)(k+2)} .
+$$
+
