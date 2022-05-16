@@ -1,7 +1,17 @@
-\section{Characterizations of Convex Functions}
+\section{Convex Functions}
+
+Definitions:
+\begin{enumerate}
+    \item  A set $S \subseteq \mathbb{R}^{n}$ is called a convex set if any two points in $S$ contain their line, i.e. for any $\boldsymbol{x}, \boldsymbol{y} \in S$ we have that $\theta \boldsymbol{x}+(1-\theta) \boldsymbol{y} \in S$ for any $\theta \in[0,1]$.
+    \item For a convex set $S \subseteq \mathbb{R}^{n}$, we say that a function $f: S \rightarrow \mathbb{R}$ is convex on $S$ if for any two points $\boldsymbol{x}, \boldsymbol{y} \in S$ and any $\theta \in[0,1]$ we have that
+    $
+    f(\theta \boldsymbol{x}+(1-\theta) \boldsymbol{y}) \leq \theta f(\boldsymbol{x})+(1-\theta) f(\boldsymbol{y})
+    $
+\end{enumerate}
+
 
 \subsection{First-order Characterization}
-\textbf{Theorem:}
+\textbf{Theorem}:
 Let $S$ be an open convex subset of $\mathbb{R}^{n}$, and let $f: S \rightarrow \mathbb{R}$ be a differentiable function. Then, $f$ is convex if and only if for any $\boldsymbol{x}, \boldsymbol{y} \in S$ we have that $f(\boldsymbol{y}) \geq f(\boldsymbol{x})+$ $\boldsymbol{\nabla} f(\boldsymbol{x})^{\top}(\boldsymbol{y}-\boldsymbol{x}) .$
 
 \subsection{Second-order Characterization}
@@ -14,16 +24,18 @@ Let $S \subseteq \mathbb{R}^{n}$ be open and convex, and let $f: S \rightarrow \
 
 \section{Gradient Descent}
 
-\textbf{Theorem:}Let $f: \mathbb{R}^{n} \rightarrow \mathbb{R}$ be a $\beta$-gradient Lipschitz, convex function. Let $\boldsymbol{x}_{0}$ be a given starting point, and let $\boldsymbol{x}^{*} \in \arg \min _{x \in \mathbb{R}^{n}} f(\boldsymbol{x})$ be a minimizer of $f$. The Gradient Descent algorithm given by
-$$
+\subsection{Vanilla Gradient Descent}
+\textbf{Theorem}: Let $f: \mathbb{R}^{n} \rightarrow \mathbb{R}$ be a $\beta$-gradient Lipschitz, convex function. Let $\boldsymbol{x}_{0}$ be a given starting point, and let $\boldsymbol{x}^{*} \in \arg \min _{x \in \mathbb{R}^{n}} f(\boldsymbol{x})$ be a minimizer of $f$. The Gradient Descent algorithm given by
+$
 \boldsymbol{x}_{i+1}=\boldsymbol{x}_{i}-\frac{1}{\beta} \boldsymbol{\nabla} f\left(\boldsymbol{x}_{i}\right)
-$$
+$
 ensures that the kth iterate satisfies
-$$
+$
 f\left(\boldsymbol{x}_{k}\right)-f\left(\boldsymbol{x}^{*}\right) \leq \frac{2 \beta\left\|\boldsymbol{x}_{0}-\boldsymbol{x}^{*}\right\|_{2}^{2}}{k+1} .
-$$
+$
 
-\textbf{Theorem} Let $f: \mathbb{R}^{n} \rightarrow \mathbb{R}$ be a $\beta$-gradient Lipschitz, convex function. 
+\subsection{Accelerated Gradient Descent}
+\textbf{Theorem}: Let $f: \mathbb{R}^{n} \rightarrow \mathbb{R}$ be a $\beta$-gradient Lipschitz, convex function. 
 The Accelerated Gradient Descent algorithm given by
 $$
 \begin{aligned}
@@ -35,7 +47,7 @@ a_{i} &=\frac{i+1}{2}, A_{i}=\frac{(i+1)(i+2)}{4} \\
 \end{aligned}
 $$
 ensures that the kth iterate satisfies
-$$
+$
 f\left(\boldsymbol{x}_{k}\right)-f\left(\boldsymbol{x}^{*}\right) \leq \frac{2 \beta\left\|\boldsymbol{x}_{0}-\boldsymbol{x}^{*}\right\|_{2}^{2}}{(k+1)(k+2)} .
-$$
+$
 
