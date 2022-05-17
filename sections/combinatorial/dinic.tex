@@ -3,5 +3,15 @@
 Definition:
 \begin{enumerate}
     \item \textbf{Level of a vertex}: given a source vertex $s$, the level of a vertex $u$ is defined to be the length of the shortest path from $s$ to $u$.
-    \item \textbf{}
+    \item \textbf{Admissible Edges}: an edge $(u, v)$ is called admissible if $l(u)+1=l(v)$, \ie, it is in one of the shortest paths from $s$ to $v$.
+    \item \textbf{Level Graph}: the level graph of $G$ is the subgraph induced by only the admissible edges, \ie, only keep edges relevant to the shortest paths. Inferring the level graph is in $O(m)$.
+    \item \textbf{Blocking flow}: a blocking flow in $G$ is a feasible flow in the level graph of $G$ such that (1) only uses admissible edges, and (2) saturates at least one edge for any $s$-$t$ path in the level graph of $G$, \ie, any $s$-$t$ path in the level graph is blocked by such a flow.
 \end{enumerate}
+
+\textbf{Dinic's algorithm}: starting from an empty flow, then repeatly augment the current flow by a blocking flow in the residual graph $G_f$ until no more $s$-$t$ path exists in $G_f$.
+
+At each iteration, the target vertex's level in the residual graph is increased by at least 1, as the original shortest path is blocked. As the level of any vertex is at most $n$, Dinic's algorithm terminates in $O(n)$ iterations. For unit-weight graphs, this can be proven to terminate in $O(\min\{m^{1/2}, n^{2/3}\})$.
+
+\subsection{Finding Blocking Flow by Depth-First Seach}
+
+Using depth-first search in the level graph, we are able to find a blocking flow in $O(nm)$, thus the total complexity of Dinic's algorithm is $O(n^2 m)$. In the unit-weight graph, depth-first seach is in $O(m)$, thus the total complexity is $O(m \min\{m^{1/2}, n^{2/3}\})$.

@@ -1,0 +1,33 @@
+\section{Link-Cut Trees}
+
+Definition:
+\begin{enumerate}
+    \item \textbf{Dynamic Graph}: a graph that is constantly changing by edge insertion/deletion. No vertex changes.
+    \item \textbf{Dynamic rooted forest}: for every edge change, the graph remains a directed forest, and each tree in the forest has a single root. The root can be reached from any vertex in this tree.
+\end{enumerate}
+
+A link-cut tree is a data structure that speeds up dynamic rooted forest changes, \ie, it always represents a uniquely determined dynamic rooted forest, but can execute edge changes in less amortized time. This can be used to speed up the process of finding blocking flows, thus making the Dinic's algorithm faster. \textbf{Note}: the link-cut tree is designed to carry weight on its vertices but not edges. However, any edge-weighted graph can be converted to be vertex-weighted, by adding a dummy vertex in the middle of each edge with the same weight, and setting the weight of all original vertices to be $+\infty$. We choose $+\infty$ so that this does not change the max flow. Other values may be chosen for other usages.
+
+The link-cut tree supports the following operations:
+\begin{enumerate}
+    \item \emph{Initialize($G$)}: creates a link-cut tree that refers to an empty dynamic rooted forest with the same vertices of $G$ but no edges, \ie, every vertex is its own root.
+    \item \emph{FindRoot($v$)}: find the root of $v$ in the current dynamic rooted forest.
+    \item \emph{AddCost($v$, $\Delta$)}: add $\Delta$ to the cost of every vertex on the path from $v$ to its root.
+    \item \emph{FindMin($v$)}: returns the first min-cost vertex on the path from $v$ to its root and its associated cost.
+    \item \emph{Link($u$, $v$)}: add an edge $(u, v)$, assuming $u$ to be a root vertex and $v$ to be in another tree. Note that the required property maintains the graph to be rooted forest and merges two trees into one.
+    \item \emph{Cut($u$, $v$)}: cuts a current edge $(u,v)$. This splits one tree into two, with $u$ being one of the root.
+\end{enumerate}
+
+\textbf{Theorem}: The link-cut tree can realize any sequence of $m$ operations in total expected time $O(m\log^2 n + |V|)$.
+
+\subsection{Implementation of Link-Cut Trees}
+
+The implementation relies on the treap structure (basically search property of binary search trees for one key + heap order for another independent key). Basically, we first construct these operations restricted to path trees, encoded by balanced treaps. The path is encoded such that one key (the searching key) of the treap stores the ``order'', \ie, $v$ is always at the right of $u$ if $u$ is the ancestor of $v$, and the other key (the heap key) stores a random value for constructing balanced binary trees with high probability.
+
+The weight changes are boosted by associating the difference between the min-cost of current vertex and the min-cost of its parent, and the difference between the cost of current vertex and the min-cost of it. We first call PCut and Plink, if necessary, to make $v$ have no precessor. When the current vertex has no precessor, the PathAddCost only needs to adjust the root's min-cost, and the PFindMin only needs to follow the child with $\Delta \text{min}=0$. As the depth is $O(\log n)$, these operations are $O(\log n)$ as well.
+
+To implement the general link-cut tree, we decompose each tree into paths so that each vertex only occur in exactly one path and each internal vertex has exactly one incoming edge. By swtiching between the different path decompositions (requires $O(\log n)$), we are able to make sure the tree under changing is always a path. This is possible because all these operations actually only changes a specific path.
+
+\subsection{Boosting Blocking Flows by Link-Cut Trees}
+
+First, as described before, we convert the level graph of current residual graph $G_f$ into vertex-weighted by adding dummy vertices. The change is that we now use the operations provided by the link-cut tree to do the DFS, which is faster than the naive DFS.

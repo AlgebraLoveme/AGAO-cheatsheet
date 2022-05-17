@@ -10,7 +10,7 @@ A \textbf{lazy random walk on a graph $G$} is a random walk, but has half probab
 
 \textbf{Dynamics of lazy random walk}: Expanding the starting distribution $p_0$ by the eigenvectors of $\tilde{W}$, we have for some $\{\alpha_i\}$ that $p_0 = \sum_{i=1}^n \alpha_i D^{1/2} \psi_i$. Therefore, we have $p_t = \tilde{W}^t p_0 = \sum_{i=1}^n \alpha_i (1-\frac{1}{2}\nu_i)^t D^{1/2}\psi_i \rightarrow \alpha_1 D^{1/2}\psi_1$ as $\nu_1=0$ and $\nu_i>0$ for $i\ne 1$. Since $\psi_1 \propto D^{1/2}\boldsymbol{1}$, we have $\psi_1 = \frac{d^{1/2}}{(\boldsymbol{1}^\top d)^{1/2}}$, thus $\alpha_1 = \psi_1^\top D^{-1/2} p_0 = \frac{\boldsymbol{1}^\top p_0}{(\boldsymbol{1}^\top d)^{1/2}} = \frac{1}{(\boldsymbol{1}^\top d)^{1/2}}$ and $\alpha_1 D^{1/2} \psi_1 = \pi$, which implies $p_t \rightarrow \pi$, the stationary distribution.
 
-\textbf{Rate of Convergence}: For any unit-weight connected graph $G$ and any starting distribution $p_0$, we have $\|p_t - \pi\|_\infty \le e^{-\nu_2 t/2} \sqrt{n}$. Therefore, a larger $\nu_2$ and smaller vertex set means faster convergence, and the convergence rate is exponential.
+\textbf{Rate of Convergence}: For any unit-weight connected graph $G$ and any starting distribution $p_0$, we have $\|p_t - \pi\|_\infty \le e^{-\nu_2 t/2} \sqrt{n}$. Therefore, a larger $\nu_2$ and smaller vertex set means faster convergence, and the convergence rate is exponential. This can be viewed as larger $\nu_2$ implies larger conductance by Cheeger's inequality, which means better connectedness.
 
 \subsection{Hitting Time}
 
