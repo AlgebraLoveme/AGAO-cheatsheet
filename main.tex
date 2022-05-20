@@ -1,6 +1,5 @@
 \documentclass[11pt,landscape,a4paper]{article}
 \usepackage[utf8]{inputenc}
-\usepackage[ngerman]{babel}
 \usepackage[T1]{fontenc}
 %\usepackage[LY1,T1]{fontenc}
 %\usepackage{frutigernext}
@@ -19,6 +18,9 @@
 \usepackage{flushend}
 \usepackage[abbreviations]{foreign}
 \usepackage{tcolorbox}
+\usepackage{amsthm}
+\usepackage{caption}
+
 
 \raggedend 
 
@@ -78,7 +80,7 @@
 \input{sections/convexity/convex_chracteristic}
 \HEADER{Spectral Graph Theory}
 
-This part is organized as follows: the first two sections discuss graph Laplacian in the spectral domain, by bounding its eigenvalues and introducing its importance (Cheeger's inequality). The random walk section provides a use case of graph spectral in the analysis of convergence, and introduces the importance of Laplacian linear equations. The next two sections show how to solve it exactly by applying pseudo inverse, as the Laplacian is non-invertible. The rest sections show how to approximate a graph Laplacian and solve the Laplacian linear equation approximately and more efficiently. 
+\emph{This part is organized as follows: the first two sections discuss graph Laplacian in the spectral domain, by bounding its eigenvalues and introducing its importance (Cheeger's inequality). The random walk section provides a use case of graph spectral in the analysis of convergence, and introduces the importance of Laplacian linear equations. The next two sections show how to solve it exactly by applying pseudo inverse, as the Laplacian is non-invertible. The rest sections show how to approximate a graph Laplacian and solve the Laplacian linear equation approximately and more efficiently.}
 
 \input{sections/spectral/eigen_bound}
 

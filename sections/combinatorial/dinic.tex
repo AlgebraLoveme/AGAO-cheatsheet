@@ -10,7 +10,11 @@ Definition:
 
 \textbf{Dinic's algorithm}: starting from an empty flow, then repeatly augment the current flow by a blocking flow in the residual graph $G_f$ until no more $s$-$t$ path exists in $G_f$.
 
-At each iteration, the target vertex's level in the residual graph is increased by at least 1, as the original shortest path is blocked. As the level of any vertex is at most $n$, Dinic's algorithm terminates in $O(n)$ iterations. For unit-weight graphs, this can be proven to terminate in $O(\min\{m^{1/2}, n^{2/3}\})$.
+\subsection{\#Iterations of the Dinic's Algorithm}
+
+At each iteration, the target vertex's level in the residual graph is increased by at least 1, as the original shortest path is blocked. As the level of any vertex is at most $n$, Dinic's algorithm terminates in $O(n)$ iterations. 
+
+For unit-weight graphs, Dinic's algorithm can be proven to terminate in $O(\min\{m^{1/2}, n^{2/3}\})$ iterations. This is because now after $k$ iterations, the next iteration would erase at least $k$ edges, as the level of the target vertex is now at least $k$ in the residual graph. (1) This implies the value of the blocking flow cannot exceed $m/k$, which implies termination after at most another $m/k$ iterations. Setting $k=m^{1/2}$ gives the first bound. (2) By pigeonhole theorem, since the level graph has at most $n-1$ vertices, there are strictly more than $k/2$ of the level sets that has \#vertices less than $2n/k$. Using pigeonhole theorem again, there is at least two adjacent level set such that both have \#vertices less than $2n/k$. This implies there are at most $4n^2/k^2$ crossing edges between these two levels, and thus the algorithm terminates after at most another $4n^2/k^2$ iterations. Setting $k=2n^{2/3}$ gives the second bound.
 
 \subsection{Finding Blocking Flow by Depth-First Seach}
 
