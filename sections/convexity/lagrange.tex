@@ -1,0 +1,19 @@
+\section{Convex Duality and Conjugate}
+
+\subsection{Separating Hyperplanes}
+
+Definition: a hyperplane $H: n^\top x = \mu$ separates two sets $A$ and $B$ iff for any $a \in A$ and any $b \in B$, we have $n^\top a \ge \mu$ and $n^\top b \le \mu$. If both equalities are strict, then we say $H$ strictly separates $A$ and $B$.
+
+\textbf{Theorem}: For two disjoint convex sets $A, B \in \mathbb{R}^{n}$, there exists a separating hyperplane $H$. If $A$ and $B$ are bounded and closed as well, then there exists a strictly separating hyperplane $H$.
+
+\subsection{Lagrange Duality}
+
+Definition:
+\begin{enumerate}
+    \item \textbf{Weak Duality}: the optima of the Lagrange dual problem is always a lower bound of the optima of the primal problem.
+    \item \textbf{Strong Duality}: the optima of the Lagrange dual problem equals the optima of the primal problem. This is implied by Slater's condition (sufficient condition). KKT condition is necessary and sufficient for strong duality.
+    \item \textbf{Slater's condition}: there is a strictly feasible point in the relative interior of the constraint domain. $\operatorname{relint}(S)=\{x \in S \text { : for all } \boldsymbol{y} \in S \text { there exists } \epsilon>0 \text { such that } \boldsymbol{x}-\epsilon(\boldsymbol{y}-\boldsymbol{x}) \in S\}.$ The proof of the implication of the strong duality requires separating hyperplane theorem.
+    \item \textbf{KKT condition}: includes the following: (1) primal feasiblity, \ie, the constraint of the primal; (2) dual feasiblity, \ie, the constraint of the dual (nonnegative multiplier for inequality constraint), (3) complementary slackness, \ie, for each inequality constraint, the product of the multiplier and the constraint must be zero, and (4) gradient condition, \ie, the gradient of the Lagrange function is zero.
+\end{enumerate}
+
+\textbf{Idea behind KKT gradient condition}: if the gradient of the object is not parallel to the gradient of the constraint, then we can take a step towards the negative gradient direction and project into the constraint set, thus decreasing the object without changing the constraint.
