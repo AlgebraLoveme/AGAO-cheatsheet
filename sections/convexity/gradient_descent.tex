@@ -3,6 +3,9 @@
 \subsection{Solving via Gradient Descent}
 
 \subsubsection{Vanilla Gradient Descent}
+
+Idea: approximate the object by its first order expansion, \ie, $x_{t+1} = x_t - \alpha \nabla f(x_t)$.
+
 \textbf{Theorem}: Let $f: \mathbb{R}^{n} \rightarrow \mathbb{R}$ be a $\beta$-gradient Lipschitz, convex function. Let $\boldsymbol{x}_{0}$ be a given starting point, and let $\boldsymbol{x}^{*} \in \arg \min _{x \in \mathbb{R}^{n}} f(\boldsymbol{x})$ be a minimizer of $f$. The Gradient Descent algorithm given by
 $
 \boldsymbol{x}_{i+1}=\boldsymbol{x}_{i}-\frac{1}{\beta} \boldsymbol{\nabla} f\left(\boldsymbol{x}_{i}\right)
@@ -24,9 +27,23 @@ a_{i} &=\frac{i+1}{2}, A_{i}=\frac{(i+1)(i+2)}{4} \\
 \boldsymbol{v}_{i+1} &=\boldsymbol{v}_{i}-\frac{a_{i+1}}{\beta} \boldsymbol{\nabla} f\left(\boldsymbol{x}_{i+1}\right)
 \end{aligned}
 $$
-ensures that the kth iterate satisfies
+ensures that the $k$-th iterate satisfies
 $
 f\left(\boldsymbol{x}_{k}\right)-f\left(\boldsymbol{x}^{*}\right) \leq \frac{2 \beta\left\|\boldsymbol{x}_{0}-\boldsymbol{x}^{*}\right\|_{2}^{2}}{(k+1)(k+2)} .
 $
 
 \subsection{Solving via Newton's Method}
+
+Idea: approximate the object by its second order expansion, \ie, $x_{t+1} = x_t - \alpha H_f^{-1}(x_t) \nabla f(x_t)$.
+
+Definition:
+\begin{itemize}
+    \item $K$-stable Hessian: we say $\mathcal{E}$ has a $K$-stable Hessian if there exists a constant matrix $\boldsymbol{A}$ s.t. for all $\boldsymbol{y}$ we have
+    $
+    \boldsymbol{H}_{\mathcal{E}}(\boldsymbol{y}) \approx_{K} \boldsymbol{A}$, \ie, $ \frac{1}{1+K} \boldsymbol{A} \preceq \boldsymbol{H}_{\mathcal{E}}(\boldsymbol{y}) \preceq(1+K) \boldsymbol{A} .
+    $
+\end{itemize}
+
+\textbf{Theorem (unconstrained)}: Assume $\mathcal{E}$ has $K$-stable Hessian, then $\mathcal{E}\left(\boldsymbol{y}_{k}\right)-\mathcal{E}\left(\boldsymbol{y}^{*}\right) \leq \epsilon\left(\mathcal{E}\left(\boldsymbol{y}_{0}\right)-\mathcal{E}\left(\boldsymbol{y}^{*}\right)\right) \text { when } k>(K+1)^{6} \log (1 / \epsilon)$ with $\alpha = \frac{1}{(1+K)^2}$. Note: $(K+1)^6$ can be reduced to $K+1$.
+
+To generalize the convergence to the linearly constrained case, notice that the constraint domain is a $C$-dimensional linear space, and thus can be connected to $\mathcal{R}^C$ via a projection matrix $\Pi_C$. Therefore, we can minimize $\mathcal{E}(\Pi_C(x))$ without constraint instead of the linearly constrained $\mathcal{E}(x)$. This does not change the $K$-stability of Hessian.

@@ -17,3 +17,16 @@ Definition:
 \end{enumerate}
 
 \textbf{Idea behind KKT gradient condition}: if the gradient of the object is not parallel to the gradient of the constraint, then we can take a step towards the negative gradient direction and project into the constraint set, thus decreasing the object without changing the constraint.
+
+\subsection{Fenchel Conjugates}
+
+ Given a (convex) function $\mathcal{E}: S \subseteq \mathbb{R}^{n} \rightarrow \mathbb{R}$, its Fenchel conjugate is a function $\mathcal{E}^{*}: \mathbb{R}^{n} \rightarrow \mathbb{R}$ defined as
+$
+\mathcal{E}^{*}(\boldsymbol{z})=\sup _{\boldsymbol{y} \in S}\langle\boldsymbol{z}, \boldsymbol{y}\rangle-\mathcal{E}(\boldsymbol{y}).
+$
+
+Properties:
+\begin{enumerate}
+    \item The Fenchel conjugate is convex even if $\mathcal{E}$ is not, as the sup of convex functions is convex.
+    \item For real-valued and continous $\mathcal{E}$ defined on a convex domain, $\mathcal{E}^{**} = \mathcal{E}$.
+\end{enumerate}
