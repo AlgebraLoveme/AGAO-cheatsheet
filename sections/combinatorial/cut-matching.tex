@@ -2,8 +2,10 @@
 Definition:
 \begin{enumerate}
     \item \textbf{Sparsity of a vertex subset}: Given $\emptyset \subset S \subset V$, the conductance $\psi(S) := \frac{|E(S, V \backslash S)|}{\min \{|S|, |V\setminus S|\}}$. This is different to the conductance $\phi(S)$ in the denominator. Since $\vol{S} \ge |S|$, it is guaranteed that $\psi(S) \ge \phi(S)$.
-    \item \textbf{Sparsity of a graph}: $\psi(G):= \min_{\emptyset \subset S \subset V} \psi(S)$. We say $G$ is a $\psi$-expander w.r.t. sparsity iff $\psi(G) \ge \psi$.
+    \item \textbf{Sparsity of a graph}: $\psi(G):= \min_{\emptyset \subset S \subset V} \psi(S)$. We say $G$ is a $\psi$-expander w.r.t. sparsity iff $\psi(G) \ge \psi$. The cut that achieves the minimum is called the sparsest cut.
 \end{enumerate}
+
+The cut-matching game is an algorithm that involves interaction of the cut player and the matching player, designed to follow a specific strategy, so that the result of such a game could certfify the sparsity of a graph.
 
 \subsection{Certifying via Embedding}
 
