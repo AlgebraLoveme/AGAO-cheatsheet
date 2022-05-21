@@ -47,3 +47,5 @@ Definition:
 \textbf{Theorem (unconstrained)}: Assume $\mathcal{E}$ has $K$-stable Hessian, then $\mathcal{E}\left(\boldsymbol{y}_{k}\right)-\mathcal{E}\left(\boldsymbol{y}^{*}\right) \leq \epsilon\left(\mathcal{E}\left(\boldsymbol{y}_{0}\right)-\mathcal{E}\left(\boldsymbol{y}^{*}\right)\right) \text { when } k>(K+1)^{6} \log (1 / \epsilon)$ with $\alpha = \frac{1}{(1+K)^2}$. Note: $(K+1)^6$ can be reduced to $K+1$.
 
 To generalize the convergence to the linearly constrained case, notice that the constraint domain is a $C$-dimensional linear space, and thus can be connected to $\mathcal{R}^C$ via a projection matrix $\Pi_C$. Therefore, we can minimize $\mathcal{E}(\Pi_C(x))$ without constraint instead of the linearly constrained $\mathcal{E}(x)$. This does not change the $K$-stability of Hessian.
+
+For the flow problem, the linear equation in the Newton's step is a Laplacian linear equation, which can be solved quickly.
