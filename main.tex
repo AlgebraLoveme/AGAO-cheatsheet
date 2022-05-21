@@ -70,7 +70,7 @@
 \begin{document}
 %\footnotesize
 \small
-\begin{multicols*}{3}
+\begin{multicols*}{2}
 
 % Part 1: Convex Optimization
 
@@ -110,7 +110,7 @@
 
 \HEADER{Combinatorial Graph Algorithms}
 
-\emph{The first section introduces the max flow problem and its duality with min cut, and the Ford-Fulkerson's algorithm which may not terminate in a general graph. The second section introduces the Dinic's algorithm, which can solve the max flow in a general graph. The third section introduces the link-cut tree, and how this can be adopted to speed up the Dinic's algorithm. The last section introduces how solving max flow can potentially help to solve other problems.}
+\emph{The first section introduces the max flow problem and its duality with min cut, and the Ford-Fulkerson's algorithm which may not terminate in a general graph. The second section introduces the Dinic's algorithm, which can solve the max flow in a general graph. The third section introduces the link-cut tree, and how this can be adopted to speed up the Dinic's algorithm. The fourth section introduces how solving max flow can potentially help to solve other problems. The fifth section introduces interior point method, based on solving max flows. The last second briefly discusses how the distance oracle can be used to approximately solve the shortest distance queries.}
 
 \input{sections/combinatorial/maximum_flow}
 
@@ -120,6 +120,9 @@
 
 \input{sections/combinatorial/cut-matching}
 
+\input{sections/combinatorial/interior_point}
+
+\input{sections/combinatorial/distance_oracles}
 
 \end{multicols*}
 \end{document}

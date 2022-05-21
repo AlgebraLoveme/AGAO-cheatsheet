@@ -1,0 +1,15 @@
+\section{Distance Oracles}
+
+Distance oracle is a data structure that quickly computes the shortest path between all vertex pairs in an undirected graph. While the Floyd-Warshall algorithm achieves this in $O(n^3)$ preprocessing time, $O(n^2)$ space and $O(1)$ query time, distance oracles are much faster and use less space in the cost of accuracy.
+
+\textbf{Theorem}: There is an algorithm that, for any integer $k \geq 1$ and undirected graph $G=(V, E)$, computes a data structure that can be stored using $\tilde{O}\left(k n^{1+1 / k}\right)$ space, and  returns in $O(k)$ time a distance estimate $\widetilde{\operatorname{dist}}(u, v)$ on querying any two vertices $u, v \in V$ such that
+$
+\operatorname{dist}(u, v) \leq \widetilde{\operatorname{dist}}(u, v) \leq(2 k-1) \cdot \operatorname{dist}(u, v).
+$
+The algorithm computes the data structure in expected time $\tilde{O}\left(k m n^{1 / k}\right)$.
+
+Note: when $k=1$, this is the same performance as using Floyd-Warshall to preprocess and a matrix to store the distance pairs.
+
+\textbf{Key Idea behind the Distance Oracle ($k=2$)}: sample a small subset of vertices $S$ with probability $n^{-1/2}$ for each vertex, then compute the shortest path from all $u \in S$ to all the vertices $v \in V$ and store $(u, v, d(u,v))$. For the vertex $u$ that are not in the selection, (1) find the min-distance selected vertex $p(u) \in S$ and store the matching $(u, p(u))$, (2) find the vertex set $\{v\mid d(u,v) < d(u, p(u))\}$ and store $(u, v, d(u, v))$. Therefore, the stored distances are exactly the shortest. For the rest distance pairs $(u, v)$ where $u \notin S$ and $v \notin S$, return an estimation $\tilde{d}(u,v) = d(u, p(u)) + d(p(u), v)$. By triangular inequality, we have $d(p(u), v) \le d(u, p(u)) + d(u, v)$, thus $\tilde{d}(u,v) \le 2d(u, p(u)) + d(u, v) \le 3d(u,v)$.
+
+To generalize, we simply sequentially sample from the previous selection with probability $n^{-1/k}$, with the first selection being the whole set.
