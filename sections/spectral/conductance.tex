@@ -5,6 +5,8 @@ Definitions:
     \item \textbf{Conductance of a vertex subset}: Given $\emptyset \subset S \subset V$, the conductance $\phi(S) := \phi(S)=\frac{|E(S, V \backslash S)|}{\min \{\vol(S), \vol(V \backslash S)\}}$, where $\vol(S) := \sum_{v \in S} \text{degree}(v)$. Define $\boldsymbol{1}_S$ to be the $n$-dimensional vector with only 1 for the vertices of $S$ and 0 for the vertices of $V \setminus S$. Assuming $\vol(S) \le \vol(V)/2$, thus $|E(V, V\setminus S)|= \sum_{(u,v)\in E} (\boldsymbol{1}_S(u) - \boldsymbol{1}_S(v))^2 = \boldsymbol{1}_S^\top L \boldsymbol{1}_S$ and $\vol(S) = \boldsymbol{1}_S^\top D \boldsymbol{1}_S$. Then $\phi(S) = \frac{\boldsymbol{1}_S^\top L \boldsymbol{1}_S}{\boldsymbol{1}_S^\top D \boldsymbol{1}_S}$.
 
     \item \textbf{Conductance of a graph}: The conductance $\phi(G) := \min_{\emptyset \subset S \subset V} \phi(S) = \min_{\substack{\emptyset \subset S \subset V \\ \vol(S)\le\vol(V)/2}} \phi(S).$
+    
+    The conductance of a complete graph $K_n$ is $\frac{n}{2(n-1)}$, and the conductance of a path graph $P_n$ is $\frac{1}{n-1}$.
 
     \item \textbf{$\phi$-expander}: For any $\phi \in (0,1]$, we call a graph $G$ to be a $\phi$-expander if $\phi(G)\ge \phi$.
     \item \textbf{$\phi$-expander decomposition of quality $q$}: A partition $\{X_i\}$ of the vertex set $V$ is called a $\phi$-expander decomposition of quality $q$ if (1) each induced graph $G[X_i]$ is a $\phi$-expander, and (2.i) \#edges not contained in any $G[X_i]$ is at most $q\cdot\phi\cdot m$. The second condition is equivalent to (2.ii) The partition removes at most $q\cdot\phi\cdot m$ edges.
@@ -15,7 +17,7 @@ Definitions:
 
 Notice that the $\lambda_2(N)$ has similar forms to $\phi(G)$. Cheeger's inequality aims to bound $\phi(G)$ by $\lambda_2(N)$.
 
-\textbf{Cheeger's Inequality}: $\frac{\lambda_2(N)}{2} \le \phi(G) \le \sqrt{2\lambda_2(N)}$.
+\textbf{Cheeger's Inequality}: $\frac{\lambda_2(N)}{2} \le \phi(G) \le \sqrt{2\lambda_2(N)}$, \ie, the conductance is closely rated to the second eigenvalue of the \textbf{normalized} Laplacian.
 
 The lower bound is proved by restricting the minimum in $\lambda_2(N)$ to be $z_S = \boldsymbol{1}_S - \alpha \boldsymbol{1}$ for some $\alpha$ such that $z_S \perp d$. The upper bound is proved by constructing $S$ for any $z \perp d$ such that $\frac{\boldsymbol{1}_S^\top L \boldsymbol{1}_S}{\boldsymbol{1}_S^\top D \boldsymbol{1}_S} \le \sqrt{2 \frac{z^\top L z}{z^\top D z}}$.
 

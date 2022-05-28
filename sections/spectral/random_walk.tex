@@ -12,6 +12,7 @@ A \textbf{lazy random walk on a graph $G$} is a random walk, but has half probab
 
 \textbf{Rate of Convergence}: For any unit-weight connected graph $G$ and any starting distribution $p_0$, we have $\|p_t - \pi\|_\infty \le e^{-\nu_2 t/2} \sqrt{n}$. Therefore, a larger $\nu_2$ and smaller vertex set means faster convergence, and the convergence rate is exponential. This can be viewed as larger $\nu_2$ implies larger conductance by Cheeger's inequality, which means better connectedness.
 
+For complete graph $K_n$ which has $\lambda_2(N) = \Theta(1)$ as implied by Cheeger's inequality, the steps required for $\epsilon$-convergence is $O(\log(n/\epsilon))$. For path graph which has $\lambda_2(N) =\Omega(1/n^2)$ as implied by Cheeger's inequality, the steps required for $\epsilon$-convergence is $O(n^2 \log (n/\epsilon))$.
 \subsection{Hitting Time}
 
 \textbf{The expected hitting time} from $a$ to $s$ is defined by $\E H_{a,s}$, where $H_{a,s} = \argmin_t\{v_t=s\mid v_0=a\}$. We want $\E H_{a,s}$ for all vertices $a$ and denote the vector as $h$, \eg, $h(s)=0$.

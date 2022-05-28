@@ -1,6 +1,16 @@
-\section{Spectral Domain of the Graph Laplacian}
+\section{Spectral Domain of the Graph}
 
 We assume the graph has $n$ vertices and $m$ edges. The vertex set is $V$ and the edge set is $E$.
+
+\subsection{Graph Laplacian}
+
+Define $D:= \diag_{v \in V} d(v)$ be the degree (sum of all weights of the edges incident to $v$) matrix, and $A$ be the adjacency matrix. Then the graph Laplacian $L$ is defined to be $L:=D-A$. For electrical graphs, $L=BR^{-1}B^\top$, where $B$ of shape $(n, m)$ is the vertex-edge incidence matrix (-1 for one end and 1 for another end), and $R:=\diag_{e \in E} 1/r_e$.
+
+Properties:
+\begin{enumerate}
+    \item Given voltage vector $x$ of shape $(n, 1)$, $x^\top L x = \sum_{(u,v) \in E} \frac{(x(u)-x(v))^2}{r(u,v)}$.
+    \item $L$ is positive semi-definite, and the dimension of $\ker(L)$ is equal to the number of connected components in the graph $G$. $\ker(L)$ is spanned by $\boldsymbol{1}_{V_i}$, where $V_i$ is the vertices of the connected components.
+\end{enumerate}
 
 \subsection{Courant-Fischer Theorem}
 \begin{enumerate}

@@ -4,7 +4,7 @@
 
 \subsubsection{Vanilla Gradient Descent}
 
-Idea: approximate the object by its first order expansion, \ie, $x_{t+1} = x_t - \alpha \nabla f(x_t)$.
+\textbf{Idea}: approximate the object by its first order expansion, \ie, $x_{t+1} = x_t - \alpha \nabla f(x_t)$.
 
 \textbf{Theorem}: Let $f: \mathbb{R}^{n} \rightarrow \mathbb{R}$ be a $\beta$-gradient Lipschitz, convex function. Let $\boldsymbol{x}_{0}$ be a given starting point, and let $\boldsymbol{x}^{*} \in \arg \min _{x \in \mathbb{R}^{n}} f(\boldsymbol{x})$ be a minimizer of $f$. The Gradient Descent algorithm given by
 $
@@ -12,8 +12,8 @@ $
 $
 ensures that the kth iterate satisfies
 $
-f\left(\boldsymbol{x}_{k}\right)-f\left(\boldsymbol{x}^{*}\right) \leq \frac{2 \beta\left\|\boldsymbol{x}_{0}-\boldsymbol{x}^{*}\right\|_{2}^{2}}{k+1} .
-$
+f\left(\boldsymbol{x}_{k}\right)-f\left(\boldsymbol{x}^{*}\right) \leq \frac{2 \beta\left\|\boldsymbol{x}_{0}-\boldsymbol{x}^{*}\right\|_{2}^{2}}{k+1},
+$ \ie, $O(1/T)$ convergence rate.
 
 \subsubsection{Accelerated Gradient Descent}
 \textbf{Theorem}: Let $f: \mathbb{R}^{n} \rightarrow \mathbb{R}$ be a $\beta$-gradient Lipschitz, convex function. 
@@ -29,8 +29,12 @@ a_{i} &=\frac{i+1}{2}, A_{i}=\frac{(i+1)(i+2)}{4} \\
 $$
 ensures that the $k$-th iterate satisfies
 $
-f\left(\boldsymbol{x}_{k}\right)-f\left(\boldsymbol{x}^{*}\right) \leq \frac{2 \beta\left\|\boldsymbol{x}_{0}-\boldsymbol{x}^{*}\right\|_{2}^{2}}{(k+1)(k+2)} .
-$
+f\left(\boldsymbol{x}_{k}\right)-f\left(\boldsymbol{x}^{*}\right) \leq \frac{2 \beta\left\|\boldsymbol{x}_{0}-\boldsymbol{x}^{*}\right\|_{2}^{2}}{(k+1)(k+2)},
+$ \ie, $O(1/T^2)$ convergence rate.
+
+
+\textbf{Remark}: If we further assume $f$ is $u$-strongly convex, then we can get exponential convergence rate for both GD and AGD with different coefficients.
+
 
 \subsection{Solving via Newton's Method}
 
