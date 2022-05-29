@@ -17,16 +17,7 @@ $ \ie, $O(1/T)$ convergence rate.
 
 \subsubsection{Accelerated Gradient Descent}
 \textbf{Theorem}: Let $f: \mathbb{R}^{n} \rightarrow \mathbb{R}$ be a $\beta$-gradient Lipschitz, convex function. 
-The Accelerated Gradient Descent algorithm given by
-$$
-\begin{aligned}
-a_{i} &=\frac{i+1}{2}, A_{i}=\frac{(i+1)(i+2)}{4} \\
-\boldsymbol{v}_{0} &=\boldsymbol{x}_{0}-\frac{1}{2 \beta} \boldsymbol{\nabla} f\left(\boldsymbol{x}_{0}\right) \\
-\boldsymbol{y}_{i} &=\boldsymbol{x}_{i}-\frac{1}{\beta} \boldsymbol{\nabla} f\left(\boldsymbol{x}_{i}\right) \\
-\boldsymbol{x}_{i+1} &=\frac{A_{i} \boldsymbol{y}_{i}+a_{i+1} \boldsymbol{v}_{i}}{A_{i+1}} \\
-\boldsymbol{v}_{i+1} &=\boldsymbol{v}_{i}-\frac{a_{i+1}}{\beta} \boldsymbol{\nabla} f\left(\boldsymbol{x}_{i+1}\right)
-\end{aligned}
-$$
+The Accelerated Gradient Descent algorithm 
 ensures that the $k$-th iterate satisfies
 $
 f\left(\boldsymbol{x}_{k}\right)-f\left(\boldsymbol{x}^{*}\right) \leq \frac{2 \beta\left\|\boldsymbol{x}_{0}-\boldsymbol{x}^{*}\right\|_{2}^{2}}{(k+1)(k+2)},

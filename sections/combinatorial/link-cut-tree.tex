@@ -30,4 +30,4 @@ To implement the general link-cut tree, we decompose each tree into paths so tha
 
 \subsection{Boosting Blocking Flows by Link-Cut Trees}
 
-First, as described before, we convert the level graph of current residual graph $G_f$ into vertex-weighted by adding dummy vertices. The change is that we now use the operations provided by the link-cut tree to do the DFS, which is faster than the naive DFS.
+First, as described before, we convert the level graph of current residual graph $G_f$ into vertex-weighted by adding dummy vertices. The change is that we now use the operations provided by the link-cut tree to do the DFS, which is faster than the naive DFS. The modified DFS uses Link and Cut to maintain the search path, and use AddCost to extract a feasible flow found. As there are $O(m)$ operations in the DFS, we can find the blocking flow in $O(m\log^2 n + n)$.

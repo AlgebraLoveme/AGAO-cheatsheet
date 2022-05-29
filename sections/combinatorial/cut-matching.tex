@@ -28,7 +28,7 @@ The algorithm runs in time $O\left(\log^{2} n\right) \cdot T_{\text {max\_flow }
 Illustration of one iteration of the Algorithm:
 
 \begin{center}
-\includegraphics[width=.6\columnwidth]{imgs/cut-match.png}
+\includegraphics[width=.5\columnwidth]{imgs/cut-match.png}
 \end{center}
 
  In a), a bi-partition $(S_i, \bar{S_i})$ of $V$ is found (requires random walk on $G$). In b), the bi-partition is used to obtain a flow problem where we inject one unit of flow to each vertex in $S_i$ via super-source $s$ and extract one unit of flow from each vertex in $\bar{S_i}$ via super-sink $t$. Every edge is set to have capacity $1/\psi$. Then we solve this problem to get a flow $f$ with $\val(f)=n/2$. If such flow does not exist, then we return the min-cut of this flow problem, removing the dummy source and sink.  c) If such flow exists, we construct a path flow decomposition. For each path, the first vertex is in $S$ and the last vertex in $\bar{S}$. d) We find $M_{i}$ to be the one-to-one matching between endpoints in $S$ and $\bar{S}$ defined by the path flows.

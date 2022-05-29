@@ -41,7 +41,7 @@ We call the minimum capacity of all edges in an $s$-$t$ flow to be the bottlenec
 
 Algorithm: find an arbitrage $s$-$t$ path flow in $G_f$, augment it to route the bottleneck, then add it to the current flow, repeatly. 
 
-For irrational capacities this algorithm may not terminate. For integer capacities (rational capacities can be translated to integer capacities to multiplication), each round must increase the capacity of current flow by at least 1, so it terminates in $F^*)$ augmentations, which is $O(m F^*))$ time.
+For irrational capacities this algorithm may not terminate. For integer capacities (rational capacities can be translated to integer capacities by multiplication), each round must increase the capacity of current flow by at least 1, so it terminates in $F^*$ augmentations, which is $O(m F^*)$ time.
 
 Modified algorithm (may be faster in some cases): find the $s$-$t$ path flow with the maximum bottleneck capacity, then add it to the current flow, repeatly.
 
